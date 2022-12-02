@@ -1,4 +1,4 @@
-filename = 'day2-2022.txt'
+filename = 'day2.txt'
 
 def read_file(fname):
     f = open(fname,"r")
