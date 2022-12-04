@@ -11,9 +11,9 @@ def fully_contained(lines):
     count = 0
     for line in lines:
         first, second = line.strip().split(',')
-        start1, stop1 = first.split('-')
-        start2, stop2 = second.split('-')
-        if (int(start1) >= int(start2) and int(stop1) <= int(stop2)) or (int(start1) <= int(start2) and int(stop1) >= int(stop2)):
+        start1, stop1 = [int(i) for i in first.split('-')]
+        start2, stop2 = [int(i) for i in second.split('-')]
+        if start1 <= start2 <= stop2 <= stop1 or start2 <= start1 <= stop1 <= stop2:
             count += 1
     return count
 
@@ -21,9 +21,9 @@ def overlap(lines):
     count = 0
     for line in lines:
         first, second = line.strip().split(',')
-        start1, stop1 = first.split('-')
-        start2, stop2 = second.split('-')
-        if (int(start1) >= int(start2) and int(start1) <= int(stop2)) or (int(start2) >= int(start1) and int(start2) <= int(stop1)):
+        start1, stop1 = [int(i) for i in first.split('-')]
+        start2, stop2 = [int(i) for i in second.split('-')]
+        if start1 <= start2 <= stop1 or start2 <= start1 <= stop2:
             count += 1
     return count
 
