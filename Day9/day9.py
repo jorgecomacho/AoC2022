@@ -3,7 +3,7 @@ filename = 'day9.txt'
 
 def read_file(fname):
     f = open(fname,"r")
-    lines = f.readlines()
+    lines = [i.strip() for i in f.readlines()]
     return lines
 
 def this_blows(lines, followers):
@@ -22,14 +22,12 @@ def this_blows(lines, followers):
             elif direction == 'D':
                 node[0].append([node[0][-1][0],node[0][-1][1]-1])
             for j in range(1, len(node)):
-                node[j].append(move_tail(node[j-1][-1], node[j][-1]))
-    
+                node[j].append(move_tail(node[j-1][-1], node[j][-1]))   
     res = []
     for i in node[-1]:
         if i not in res:
             res.append(i)
     print(len(res))
-
 
 def move_tail(new_head, old_tail):
     if new_head[0] == old_tail[0]:
@@ -50,18 +48,10 @@ def move_tail(new_head, old_tail):
     y_offset = new_head[1] - old_tail[1]
     if abs(x_offset) <= 1 and abs(y_offset) <= 1:
         return old_tail
-    if x_offset > 0:
-        x_offset = 1
-    elif x_offset < 0:
-        x_offset = -1
-    if y_offset > 0:
-        y_offset = 1
-    elif y_offset < 0:
-        y_offset = -1
-    return [old_tail[0]+x_offset, old_tail[1]+y_offset]
+    offset = [0, 1, 1, -1, -1]
+    return [old_tail[0]+offset[x_offset], old_tail[1]+offset[y_offset]]
 
 if __name__ == "__main__":
-    lines = [i.strip() for i in read_file(filename)]
+    lines = read_file(filename)
     this_blows(lines, 1)
     this_blows(lines, 9)
-   
